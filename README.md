@@ -13,14 +13,10 @@ ___
 This file is based on an attack strategy. The attack strategy defines the different phases of attack, this strategy is inspired 
 by the [Cyber Kill Chain](https://en.wikipedia.org/wiki/Kill_chain).﻿ In this strategy that I present to you is composed of 3 PHASES : 
 
-- PHASE 1 [ _RECONNAISSANCE_ ] : Gather information about our target, such as which technologies are used ? What ports are open and what services are used ? 
-What vulnerabilities and weaknesses can be exploited ? The greater the amount of information gathered, the more sophisticated the attack and the higher the probability of success.
+- PHASE 1 [ _RECONNAISSANCE_ ] : Gather information about our target, such as which technologies are used ? What ports are open and what services are used ? What vulnerabilities and weaknesses can be exploited ? The greater the amount of information gathered, the more sophisticated the attack and the higher the probability of success.
 
 - PHASE 2 [ _EXPLOITATION_ ] : Exploitation of the vulnerabilities identified in the reconnaissance phase. The aim of this phase is to gain initial access to the target's system.
 
-- PHASE 3 [ _TOTAL CONTROL & EVASION_ ] : At this point we have restricted, unstable access which is likely to be detected. 
-So to avoid losing access, we can open up other paths so that we can easily regain access in the event of problems. 
-To do this, we need to obtain more privileges known as elevation of privileges which means moving from a restricted access level to a higher one. 
-Once we've completed our mission, we must erase all traces of our passage.
+- PHASE 3 [ _TOTAL CONTROL & EVASION_ ] : At this point we have restricted, unstable access which is likely to be detected. So to avoid losing access, we can open up other paths so that we can easily regain access in the event of problems. To do this, we need to obtain more privileges known as elevation of privileges which means moving from a restricted access level to a higher one. Once our mission is completed, we must erase all traces of our passage and leave the network.
 
 **The example.txt file is a perfect example of how to use this strategy in a CTF challenge.**
