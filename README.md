@@ -1,5 +1,5 @@
 # CTF FOFIC
-![CTF_FOFIC_EXEC](https://i.ibb.co/nRHn6nj/CTF-FOFIC.gif)
+![CTF_FOFIC_EXEC](https://i.ibb.co/dLFTNt0/CTF-FOFIC.gif)
 
 ### I - [ INTRODUCTION ]
 
